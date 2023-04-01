@@ -1,1 +1,68 @@
-<h1>Hadi</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>My Portfolio</h1>
+            <p>Welcome to my portfolio website!</p>
+            <a href="#" class="cta">View My Work</a>
+        </section>
+
+        <section class="about">
+            <h2>About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at sodales tellus, eu tristique eros. Praesent et eleifend libero, quis ullamcorper augue. Ut volutpat, arcu at dapibus auctor, augue magna porttitor neque, non varius quam nulla et elit.</p>
+            <a href="#" class="cta">Learn More</a>
+        </section>
+
+        <section class="portfolio">
+            <h2>My Work</h2>
+            <div class="gallery">
+                <img src="img/work1.jpg" alt="Work 1">
+                <img src="img/work2.jpg" alt="Work 2">
+                <img src="img/work3.jpg" alt="Work 3">
+                <img src="img/work4.jpg" alt="Work 4">
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>Contact Me</h2>
+            <form action="#">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message"></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Portfolio</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
