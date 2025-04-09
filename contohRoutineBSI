@@ -1,0 +1,46 @@
+SUBROUTINE SYARIAH.WADIAH.PROFIT.CALC(ACCOUNT.ID, PROFIT.AMOUNT)
+* Routine untuk menghitung bagi hasil tabungan wadiah
+* Input: ACCOUNT.ID - ID akun nasabah
+* Output: PROFIT.AMOUNT - Jumlah bagi hasil yang dihitung
+
+$INSERT I_COMMON
+$INSERT I_EQUATE
+$INSERT I_F.ACCOUNT
+$INSERT I_F.SYARIAH.PARAMETER
+
+* Deklarasi variabel
+  Y.AVG.BALANCE = 0
+  Y.PROFIT.RATE = 0
+  Y.TOTAL.DAYS = 30 ;* Asumsi perhitungan bulanan
+
+* Baca data akun dari tabel ACCOUNT
+  CALL F.READ('F.ACCOUNT', ACCOUNT.ID, R.ACCOUNT, F.ACCOUNT, ERR.ACC)
+  IF ERR.ACC THEN
+    CALL LOG.ERROR('SYARIAH.WADIAH.PROFIT.CALC', 'Account not found: ' : ACCOUNT.ID)
+    RETURN
+  END
+
+* Ambil saldo rata-rata dari histori (contoh sederhana)
+  Y.AVG.BALANCE = R.ACCOUNT<AC.AVERAGE.BALANCE>
+  IF Y.AVG.BALANCE <= 0 THEN
+    PROFIT.AMOUNT = 0
+    RETURN
+  END
+
+* Baca parameter syariah untuk rasio bagi hasil
+  CALL F.READ('F.SYARIAH.PARAMETER', 'WADIAH.PROFIT.RATE', R.PARAM, F.SYARIAH.PARAMETER, ERR.PARAM)
+  IF ERR.PARAM THEN
+    Y.PROFIT.RATE = 0.02 ;* Default 2% jika parameter tidak ditemukan
+  END ELSE
+    Y.PROFIT.RATE = R.PARAM<SYR.PROFIT.RATE>
+  END
+
+* Hitung bagi hasil
+  PROFIT.AMOUNT = (Y.AVG.BALANCE * Y.PROFIT.RATE * Y.TOTAL.DAYS) / 365
+  PROFIT.AMOUNT = DROUND(PROFIT.AMOUNT, 2) ;* Pembulatan 2 desimal
+
+* Log hasil perhitungan
+  CALL LOG.INFO('SYARIAH.WADIAH.PROFIT.CALC', 'Profit calculated for ' : ACCOUNT.ID : ' = ' : PROFIT.AMOUNT)
+
+RETURN
+END
