@@ -1,2 +1,2 @@
 # rama-resolusi
-Repository untuk menyimpan rencana rama kedepannya
+Repository Data Tes T24 Temenos Core Banking
