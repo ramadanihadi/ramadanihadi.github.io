@@ -1,0 +1,12 @@
+VERSION NAME: FUNDS.TRANSFER,MURABAHAH.INPUT
+APPLICATION: FUNDS.TRANSFER
+FIELD NO    FIELD NAME              VALIDATION              ENRICHMENT
+1           ACCOUNT.1               SYARIAH.ACCOUNT.CHECK   Customer Name
+2           ACCOUNT.2               SYARIAH.ACCOUNT.CHECK   Supplier Name
+3           AMOUNT.DEBITED          MURABAHAH.AMOUNT.VALID  Total Cost
+4           AMOUNT.CREDITED         NONE                    Margin + Cost
+5           VALUE.DATE              NONE                    Today’s Date
+6           NARRATIVE               NONE                    "Pembiayaan Murabahah"
+
+AUTO.FIELD: AMOUNT.CREDITED = AMOUNT.DEBITED * (1 + MURABAHAH.MARGIN)
+HOT.FIELD:  VALIDATE MURABAHAH.CHECK
